@@ -1,5 +1,3 @@
-from google.cloud import bigquery
-
 import sys.modules as modules
 
 if 'bigquery' not in modules:
@@ -7,5 +5,5 @@ if 'bigquery' not in modules:
 if 'pd' not in modules:
     import pandas as pd
 
-def bq_query(query, client, *args, **kwargs):
-    return pd.DataFrame(client.query(query))
+def bq_query(client, query,  *args, **kwargs):
+    return client.query(query, *args, **kwargs).to_dataframe()
